@@ -8,8 +8,8 @@ import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import StallModal from "../../Cards/StallModal";
 import { useRouter } from "next/router";
-import { useAuth } from "../../contexts/AuthContext";
-import Landing from "../../components/Landing";
+import { useAccount } from 'wagmi';
+import { Connect } from "../../components/Connect";
 import Image from 'next/image'
 
 
@@ -20,7 +20,7 @@ import Image from 'next/image'
   const [isOwner,setIsOwner] = useState(false);
   const [isOpen,setOpen] = useState(false);
   const [isOpen2,setOpen2] = useState(false);
- const {currentUser} = useAuth();
+  const {isConnected,address } = useAccount();
   const [isdata, setIsData] = useState([]);
   const [ channel, setChannel] = useState([]);
   const [stalls , setStalls] = useState([]);
@@ -31,7 +31,7 @@ import Image from 'next/image'
  const [ObjId, setObjId]= useState(null);
  const [logo, setLogo]= useState([]);
    
- const useraddress = currentUser?.addr;
+ const useraddress = address;
   console.log(useraddress);
    const API = process.env.NEXT_PUBLIC_API_URI;
 

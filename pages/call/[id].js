@@ -5,25 +5,26 @@ import { Player } from "@livepeer/react";
 import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import { useRouter } from "next/router";
-import { useAuth } from "../../contexts/AuthContext";
-import Landing from "../../components/Landing";
+import { useAccount } from 'wagmi';
 import Image from "next/image";
+import { Connect } from "../../components/Connect";
+
 
 
 
 
  export default function Calls() {
+  const {isConnected,address } = useAccount();
   const router = useRouter();
   const [isOwner,setIsOwner] = useState(false);
   const [isOpen,setOpen] = useState(false);
- const {currentUser} = useAuth();
   const [isdata, setIsData] = useState([]);
  const [callName,setcallName] = useState();
  const [name,setName] = useState([]);
  const [ObjId, setObjId]= useState(null);
  const [logo, setLogo]= useState([]);
-   
- const useraddress = currentUser?.addr;
+ const [tTables, setT]= useState([]);   
+ const useraddress = address;
 
    const API = process.env.NEXT_PUBLIC_API_URI;
 
@@ -54,6 +55,24 @@ import Image from "next/image";
     setcallName(name);
   };
 
+  
+  const tableAdd = async (name)=>{
+    
+    const toastId  = toast.loading("Loading...");
+    if (tTables !== []){name = `table${tTables + 1}`};
+      const response = await axios.post(`http://${API}/api/tables/add`, {name,_id:ObjId});
+    if (response.status === 200) {
+      toast.update(toastId, { render: "Created New Table", type: "success", isLoading: false, autoClose: 5000})
+      const { data: userData } = await axios.get(`http://${API}/api/tables/?_id=${ObjId}`);
+      setIsData(userData.userDoc);
+     ;
+    } else {
+
+      toast.update(toastId, { render: "Some error occured", type: "error", isLoading: false, autoClose: 5000 })
+      
+    };
+
+  }
 
   
   const tableRender = async (name)=>{
@@ -83,8 +102,8 @@ import Image from "next/image";
       const { id } = router.query;
       if (id) {
         const { data: callData } = await axios.post(`http://${API}/api/calls/get`, { callId: id });
-        console.log(callData);
-        if(callData.Owner === useraddress){setIsOwner(true)}
+        console.log(callData.userDoc.Owner);
+        if(callData.userDoc.Owner === useraddress){setIsOwner(true)}
         setName(callData.userDoc.callName);
         setObjId(callData.userDoc._id);
         setLogo(callData.userDoc.callLogo);
@@ -92,6 +111,7 @@ import Image from "next/image";
       if (ObjId !== null) {
         const { data: userData } = await axios.get(`http://${API}/api/tables/?_id=${ObjId}`);
         setIsData(userData.userDoc);
+         setT(isdata?.length);
       }
     } catch (error) {
       console.error(error);
@@ -130,15 +150,15 @@ theme="dark"
   }} useraddress="useraddress" isOpen={isOpen} name={callName} onClose={(name)=>{handleDelete(name)}}key={1}/>
     <div className="stream">
     <div className="btn1 overflow-hidden"><img className="pb-3" src={logo} width={500} height={500} alt="V"/></div>
-    <div className="miniNav"> <h1>{name}
+    <div className="miniNav"> <h1 className="font-semibold text-xl mx-3">{name}
          </h1> 
     </div>
    <Image src='/wew.svg' height={40} width={40}/>
    <div className="unit"><div className=" bg-black rounded-lg ml-1 p-1"><Image src='/1212.svg' height={20} width={20}/>
-   </div><div className="flex-grow flex justify-center items-center"><Landing/></div></div>
+   </div><div className="flex justify-center items-center"><Connect/></div></div>
     <button className="button3 bg-red-600">Leave Meet</button>
   </div>
-   
+   {console.log(useraddress,"addr")}
   <div className="sec2">
  <div className="w-full flex flex-row h-10 justify-center items-center">
    <h1 className="text-xl font-semibold mb-6">Main Event</h1></div>
@@ -152,12 +172,16 @@ theme="dark"
     /></div> 
 <img className="w-3/12 h-auto" src="/div.svg"alt="V"/>
   </div></div>
-  <div className="w-10/12 mx-auto rounded bg-black2 flex min-h-60 flex-col justify-center items-center gap-y-5 my-10 py-5">
-    <h1 className="font-semibold text-2xl left-2 ml-7">Networking Slots</h1>
-    <div className="flex flex-row w-9/12 gap-y-2 justify-between items-center flex-wrap">
+  <div className="shadowCall2 w-10/12 mx-auto rounded bg-black2 flex min-h-60 flex-col justify-center items-center gap-y-5 my-10 py-5">
+    <h1 className="font-semibold text-xl my-1">Networking Slots</h1>
+    <div className="flex flex-row w-10/12 gap-y-2 justify-between items-center flex-wrap">
+    {console.log(isOwner)}
     {isdata.map((e,index)=>{
         return <Table tableName={e.tableName} OId={ObjId} key={index} onOpen={(name)=>{tableRender(name)}} />
-      })}</div></div>
+      })}
+      {isOwner && <div className=" shadowCall w-5/12 h-32  bg-[#2a2a2a] rounded-md flex flex-row justify-center items-center">
+       <div onClick={()=>{tableAdd()}} className="w-11/12 h-24 cursor-pointer shadowCall3 mx-3 flex flex-row items-center justify-center"><h1 className="text-3xl cursor-pointer font-extrabold">+</h1></div> 
+      </div>}</div></div>
  <div className="dock">
       {/* Add your dock items here */}
       <Image src="/Modal.png" width="400" height="80" alt="V"/>

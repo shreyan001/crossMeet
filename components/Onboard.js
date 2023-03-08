@@ -5,20 +5,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import Register from './functions/Register';
 import CreateMeet from './createMeet';
 import { useRouter } from 'next/router';
-import Landing from './Landing';
-import { useAuth } from '../contexts/AuthContext';
+import { useAccount } from 'wagmi';
+import { Connect } from './Connect';
 
 
 import axios from "axios";
 
 
-
-
-
 export  default function Login() {
   
  const router = useRouter();
- const {currentUser} = useAuth();
+ const {isConnected,address } = useAccount();
+
  
   const [code,setCode] = useState();
   const [isMOpen,setMOpen] = useState(false);
@@ -47,7 +45,7 @@ async function handleLogin() {
     if(block.status===200) {
       if(objName && blockData[objName]._id) {
         setid(blockData[objName]._id);
-        const response = await axios.post(`http://${API}/api/login`, {address:currentUser?.addr,id:blockData[objName]._id});
+        const response = await axios.post(`http://${API}/api/login`, {address:address,id:blockData[objName]._id});
   
         if (response.status === 200) {
           toast.update(toastId, { render: "All is good", type: "success", isLoading: false, autoClose: 5000 });
@@ -77,14 +75,14 @@ async function handleLogin() {
 
 const redirect = () => {
    if(!code) {toast.error("please enter your code first")}
-    else if(currentUser?.loggedIn && code.length===5){
+    else if(isConnected && code.length===5){
       handleLogin();
    
     }
-    else if (currentUser?.loggedIn && code.length===null){
+    else if (isConnected && code.length===null){
       toast.error('please enter your code first');
     }
-    else if(currentUser?.loggedIn && code.length !==7) {
+    else if(isConnected && code.length !==7) {
         toast.error('Meet code must be 5 digits'); 
     }
     else{
@@ -93,7 +91,7 @@ const redirect = () => {
 }
     
     return(  <>
-<Register code={code} objectName={objectName} address={currentUser?.addr} isMOpen={isMOpen} id={id} onMClose={()=>{setMOpen(false)}} />
+<Register code={code} objectName={objectName} address={address} isMOpen={isMOpen} id={id} onMClose={()=>{setMOpen(false)}} />
 <ToastContainer
 transition={Slide}
 position="top-right"
@@ -108,7 +106,7 @@ pauseOnHover
 theme="dark"
 />
   
-<CreateMeet meetMod={meetMod} address={currentUser?.addr} onClose={()=>setMeetMod(false)}/>
+<CreateMeet meetMod={meetMod} address={address} onClose={()=>setMeetMod(false)}/>
 
  <div className=" relative w-11/12 m-auto bg-black4 rounded-2xl h-fit pb-4" style={{"min-height":"86vh"}}>
     <nav className=" relative flex-col mx-auto justify-between items-center w-11/12 mt-12 mb-8" >
@@ -121,7 +119,7 @@ theme="dark"
         <div className="mx-2 flex flex-row justify-center items-center h-24 w-fit">
             <a className='hover:opacity-60 cursor-pointer colorcode font-semibold text-lg px-3'
                 onClick={()=>{toast.dark("Coming Soon")}}
-                       >Marketplace</a><Landing/></div>
+                       >Marketplace</a><Connect/></div>
        </div>
     </nav>
 

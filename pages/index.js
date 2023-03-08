@@ -1,8 +1,8 @@
 import Head from "next/head";
-import Landing from "../components/Landing";
-import Transaction from "../components/Transaction";
 import Login from "../components/Onboard";
 import { useRouter } from "next/router";
+
+
 
 
 export default function Home() {
@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>re:block</title>
-        <meta name="description" content="My first web3 app on Flow!" />
+        <title>CrossMeet</title>
+        <meta name="description" content="web3 native events!!" />
         <link rel="icon" href="/logoimg.png" />
       </Head>
 

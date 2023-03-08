@@ -89,7 +89,7 @@ const CreateMeet = ({address, onClose, meetMod}) => {
               Meet Name:
             </label>
             <input
-              className="appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+              className="appearance-none border rounded w-full py-2 px-3 text-white bg-inherit leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               id="meetName"
               value={meetName}

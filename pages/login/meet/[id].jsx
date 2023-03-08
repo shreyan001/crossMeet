@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import Landing from "../../../components/Landing";
-
+import { useAccount } from 'wagmi';
+import { Connect } from "../../../components/Connect";
 
 export default function ProductPage() {
  const router = useRouter();
@@ -12,7 +12,7 @@ export default function ProductPage() {
     <div>
       <h1>Product {id}</h1>
       {/* Display product data here */}
-      <Landing/>
+      <Connect/>
       <button onClick={()=>{router.push(`/meet/${id}`)}} className="button1">Enter Meet</button>
     </div>
   );

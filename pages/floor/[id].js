@@ -4,8 +4,8 @@ import Table from "../../Cards/Table3";
 import axios from 'axios';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import { useRouter } from "next/router";
-import { useAuth } from "../../contexts/AuthContext";
-import Landing from "../../components/Landing";
+import { useAccount } from 'wagmi';
+import { Connect } from "../../components/Connect";
 import Image from 'next/image'
 
 
@@ -15,7 +15,7 @@ import Image from 'next/image'
   const router = useRouter();
   const [isOwner,setIsOwner] = useState(false);
   const [isOpen,setOpen] = useState(false);
-  const {currentUser} = useAuth();
+  const {isConnected,address } = useAccount();
   const [isdata, setIsData] = useState([]);
   const [meetName,setMeetName] = useState();
   const [name,setName] = useState([]);
@@ -23,7 +23,7 @@ import Image from 'next/image'
   const [logo, setLogo]= useState([]);
   const items = new Array(8).fill(null); 
 
- const useraddress = currentUser?.addr;
+ const useraddress = address;
   console.log(useraddress);
    const API = process.env.NEXT_PUBLIC_API_URI;
 
@@ -132,7 +132,7 @@ theme="dark"
     <div className="flex flex-row items-center justify-around ">
     <div className="btn1 overflow-hidden"><img className="pb-3" src={logo} width={500} height={500} alt="V"/></div>
     <div className="h-16 w-3/4 flex flex-row justify-between pr-8 font-extrabold items-center text-sm"> <h1 className="text-2xl">{name}
-         </h1> <Landing/>
+         </h1> <Connect/>
     </div>
   </div><div className="w-11/12 h-fit flex mx-auto flex-row gap-3 items- center justify-around">
      <div className="w-1/2 pt-5 bg-[#1C1C1C] rounded-lg h-80 flex flex-col items-center justify-evenly">
