@@ -38,7 +38,7 @@ const items = new Array(x).fill(null);
         <div className=" shadowCall flex flex-wrap items-center justify-center gap-4 w-5/12 h-32 bg-[#2a2a2a] px-4 py-2 rounded-sm ">{console.log(isdata,tableName)}
            {isdata.map((i)=>{return <div className="profles2">{console.log(isdata)}
                <div className="image-clip2"><img src={ i.image} alt={i.name}/></div> 
-                <div className=" font-normal">{i.name}</div>
+                <div>{i.name}</div>
             </div>})}
 {items.map((_, idx) => <div key={idx} onClick={()=>{onOpen(tableName),synx2(tableName)}} className="joinCall cursor-pointer">
   <div className=" flex flex-col items-center justify-center px-4 rounded-sm"><h3 className=' mt-4 font-bold text-lg'>+</h3><h4 className='font-semibold text-sm'>Join</h4></div></div>)}

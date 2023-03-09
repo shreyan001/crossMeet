@@ -9,12 +9,12 @@ import "../styles/Cards.css"
 import "../styles/Screen.css"
 import '@rainbow-me/rainbowkit/styles.css';
 import { RainbowKitProvider,  darkTheme , getDefaultWallets} from '@rainbow-me/rainbowkit';
-
 import { configureChains, createClient, useAccount, WagmiConfig } from 'wagmi';
 import { bscTestnet } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
-
+import { XmtpContextProvider } from "../context/XmtpContext";
+import { Buffer } from "buffer";
 
 const { chains, provider } = configureChains(
   [bscTestnet],
@@ -38,9 +38,8 @@ const wagmiClient = createClient({
 
 
 
-
-
 function MyApp({ Component, pageProps }) {
+  
 
   const [showPopup,setShowPopup] = useState(false);
 
@@ -67,16 +66,18 @@ const client = createReactClient ({
       <main className="container">
       <MobileWarning showPopup={showPopup} closePopup={()=>{setShowPopup(false)}}/>
       <LivepeerConfig client={client}>
-      <WagmiConfig client={wagmiClient}>
+      <WagmiConfig client={wagmiClient}><XmtpContextProvider> 
 <RainbowKitProvider chains={chains}  coolMode    theme={darkTheme({
         accentColor: 'linear-gradient(91.44deg, #D800A8 17.68%, #FF007A 88.87%)',
         accentColorForeground: 'white',
         borderRadius: 'medium',
         fontStack: 'system',
       })}
->    <Component {...pageProps} />
+> 
+  <Component {...pageProps} />
+
 </RainbowKitProvider>
-</WagmiConfig>
+</XmtpContextProvider></WagmiConfig>
             
         
         </LivepeerConfig>

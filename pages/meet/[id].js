@@ -213,7 +213,7 @@ theme="dark"
     <div className="btn1 overflow-hidden"><img className="pb-3" src={logo} width={500} height={500} alt="V"/></div>
     
     <div className="miniNav"> <h1>{name}
-         </h1> <Landing/>
+         </h1> 
     </div>
   </div>
    

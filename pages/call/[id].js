@@ -15,6 +15,7 @@ import { huddleIframeApp } from "@huddle01/huddle01-iframe";
 
 
 
+
  export default function Calls() {
   const {isConnected,address } = useAccount();
   const router = useRouter();
@@ -184,7 +185,7 @@ theme="dark"
       objectFit="cover"
       priority
     /></div> 
-<img className="w-3/12 h-auto" src="/div.svg"alt="V"/>
+
   </div></div>
   {isVisible && <div  ref={targetDivRef}
         className="shadowCall2 w-10/12 mx-auto rounded bg-black2 flex min-h-60 flex-col justify-center items-center gap-y-5 my-10 py-5">
