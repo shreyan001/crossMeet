@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Connect } from "../../components/Connect";
 import ToggleButtons from "../../components/Dock";
 import { huddleIframeApp } from "@huddle01/huddle01-iframe";
+import Chat from "../../components/chat/Chat";
 
 
 
@@ -26,12 +27,14 @@ import { huddleIframeApp } from "@huddle01/huddle01-iframe";
  const [name,setName] = useState([]);
  const [ObjId, setObjId]= useState(null);
  const [logo, setLogo]= useState([]);
- const [tTables, setT]= useState([]);   
+ const [tTables, setT]= useState([]);  
+ const [addr, setAddr]  = useState([]);  
  const useraddress = address;
 
    const API = process.env.NEXT_PUBLIC_API_URI;
 
    const [isVisible, setIsVisible] = useState(false);
+   const [isVisible2, setIsVisible2] = useState(false);
    const targetDivRef = useRef(null);
  
    const handleButtonClick = () => {
@@ -42,6 +45,15 @@ import { huddleIframeApp } from "@huddle01/huddle01-iframe";
         }, 0);
       
      }
+
+   };
+
+
+ 
+   const handleButtonClick2 = () => {
+     setIsVisible2(!isVisible2);
+      
+     
 
    };
    const handleDelete = async(name1) => {
@@ -117,7 +129,7 @@ import { huddleIframeApp } from "@huddle01/huddle01-iframe";
       const { id } = router.query;
       if (id) {
         const { data: callData } = await axios.post(`http://${API}/api/calls/get`, { callId: id });
-        console.log(callData.userDoc.Owner);
+        setAddr(callData.userDoc.Owner);
         if(callData.userDoc.Owner === useraddress){setIsOwner(true)}
         setName(callData.userDoc.callName);
         setObjId(callData.userDoc._id);
@@ -177,7 +189,7 @@ theme="dark"
   <div className="sec2">
  <div className="w-full flex flex-row h-10 justify-center items-center">
    <h1 className="text-xl font-semibold mb-6">Main Event</h1></div>
- <div className="w-full flex gap-4 items-center flex-row"><div className="streamb">
+ <div className="w-full flex gap-4 items-center justify-center flex-row"><div className="streamb">
 <Player
       title="stream"
       playbackId="8dd55f8l5jsiyhd8"
@@ -185,7 +197,7 @@ theme="dark"
       objectFit="cover"
       priority
     /></div> 
-
+{isVisible2 && <Chat addr={addr} logo={logo}/>}
   </div></div>
   {isVisible && <div  ref={targetDivRef}
         className="shadowCall2 w-10/12 mx-auto rounded bg-black2 flex min-h-60 flex-col justify-center items-center gap-y-5 my-10 py-5">
@@ -199,7 +211,7 @@ theme="dark"
        <div onClick={()=>{tableAdd()}} className="w-11/12 h-24 cursor-pointer shadowCall3 mx-3 flex flex-row items-center justify-center"><h1 className="text-3xl cursor-pointer font-extrabold">+</h1></div> 
       </div>}</div></div>}
 
-      <ToggleButtons network = {handleButtonClick}/>
+      <ToggleButtons network = {handleButtonClick} chat={handleButtonClick2}/>
 
      
  

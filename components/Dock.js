@@ -2,7 +2,7 @@ import { useState } from "react";
 import { huddleIframeApp } from "@huddle01/huddle01-iframe";
 import Image from "next/image";
 
-function ToggleButtons({leaveMeet,network}) {
+function ToggleButtons({leaveMeet,network,chat}) {
   const [button1On, setButton1On] = useState(false);
   const [button2On, setButton2On] = useState(false);
   const [button3On, setButton3On] = useState(false);
@@ -33,7 +33,7 @@ function ToggleButtons({leaveMeet,network}) {
 
   const toggleButton4 = () => {
     setButton4On(!button4On);
-    // perform button 4's toggle function here
+    chat();
   };
 
   const toggleButton5 = () => {

@@ -10,7 +10,7 @@ import MessageList from "./MessageList";
 import ConversationList from "./ConversationList";
 import useStreamConversations from "../../hooks/useStreamConversations";
 
-const Chat = () => {
+const Chat = ({logo,addr}) => {
   const [providerState] = useContext(XmtpContext);
   const { convoMessages, client } = providerState;
   const [selectedConvo, setSelectedConvo] = useState(null);
@@ -51,9 +51,9 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex align-center flex-dir-col Chat">
+    <div className="flex items-center flex-col Chat">
       <Header />
-      {client && (
+  
         <div className="card">
           {!selectedConvo && !isNewMsg ? (
             <>
@@ -69,8 +69,9 @@ const Chat = () => {
             <>
               <div className="conversation-header align-center flex justify-start">
                 <BackButton reset={reset} />
-                <div className="identicon"></div>
+                <div className="identicon"><img src={logo} alt='/1221.png'/></div>
                 <AddressInput
+                  addr={addr}
                   isNewMsg={isNewMsg}
                   onInputBlur={onInputBlur}
                   errorMsg={errorMsg}
@@ -91,8 +92,9 @@ const Chat = () => {
             </>
           )}
         </div>
-      )}
+      
     </div>
+   
   );
 };
 

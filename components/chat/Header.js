@@ -9,16 +9,15 @@ const Header = () => {
   const {address} = useAccount();
 
   return (
-    <div className="header flex align-center justify-between">
+    <div className="header flex flex-row justify-end mr-5">
       {address &&
-        <div className="flex align-center header-mobile">
-          <h3>{address}</h3>
+        <div className="flex  header-mobile">
           {!providerState.client && (
             <button
-              className="btn"
+              className="button1"
               onClick={() => providerState.initClient(signer)}
             >
-              Connect to XMTP
+              Sign
             </button>
           )}
         </div>

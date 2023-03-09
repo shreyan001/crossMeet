@@ -6,12 +6,13 @@ const AddressInput = ({
   onInputBlur,
   errorMsg,
   selectedConvo,
+  addr
 }) => {
-  const [newAddress, setNewAddress] = useState("");
+  const [newAddress, setNewAddress] = useState(addr);
   return (
-    <div className={`flex flex-dir-col ${isNewMsg ? "flex-1" : ""}`}>
+    <div className="flex flex-row w-full">
       {isNewMsg ? (
-        <>
+        <div className="flex flex-col flex-grow">
           <Input
             setNewValue={setNewAddress}
             placeholder="Enter a wallet address"
@@ -19,9 +20,9 @@ const AddressInput = ({
             onInputBlur={() => onInputBlur(newAddress)}
           />
           {errorMsg && (
-            <span className="new-address flex-dir-col">{errorMsg}</span>
+            <span className="new-address text-xs">{errorMsg}</span>
           )}
-        </>
+        </div>
       ) : (
         <b>{selectedConvo}</b>
       )}

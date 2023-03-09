@@ -35,8 +35,8 @@ const items = new Array(x).fill(null);
 
     return (
                
-        <div className="table1">{console.log(isdata,tableName)}
-          <div className="arrange2">  {isdata.map((i)=>{return <div className="profles1">
+        <div className="shadowCall flex flex-wrap items-center justify-center gap-4 w-5/12 h-32 bg-[#2a2a2a] px-4 py-2 rounded-sm">{console.log(isdata,tableName)}
+          <div className="arrange2">  {isdata.map((i)=>{return <div className="profles2">
                <div className="image-clip"><img src={ i.image} alt={i.name}/></div> 
                 <div className="nameit">{i.name}</div>
             </div>})}
