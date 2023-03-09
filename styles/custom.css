@@ -1,6 +1,7 @@
  
   .container {
-    width: min(90%,1300 px)
+    margin: auto;
+    width: max(95%,1300px)
   }
   
   button {
@@ -40,23 +41,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30%;
-    height: 60px; /* Change this to adjust the height of the dock */
+    width: 28%;
+    height: 72px; /* Change this to adjust the height of the dock */
     z-index: 100;
+    background: #1C1C1C;
+    box-shadow: 0px 4px 8px 9px rgba(0, 0, 0, 0.25);
+    border-radius: 9px;
+    gap: 0.6rem;
   }
   
   .dock-item {
     padding: 0.3rem 0.3rem 0.3rem 0.3rem;
     border-radius: 2px;
     background-color: #282c34;
-    margin: 0 15px; /* Change this to adjust the spacing between the dock items */
+    height: 56px;
+    width: 56px; /* Change this to adjust the spacing between the dock items */
   }
   
-  .dock-item img {
-    display: block;
-    width: 40px; /* Change this to adjust the width of the dock items */
-    height: 40px; /* Change this to adjust the height of the dock items */
-  }
+
   
   
   .streamb{
@@ -213,6 +215,7 @@ border-radius: 9px;
     height:2.4rem;
     width: 2.4rem;
     display:flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -220,7 +223,7 @@ border-radius: 9px;
   }
   
   .btn1 img {
-    height: fit-content;
+   padding-top: 0.8rem;
   }
   
   .miniNav{

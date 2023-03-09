@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import Modal from  '../../components/Modal'
 import Table from "../../Cards/Table2";
 import { Player } from "@livepeer/react";
@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import { useAccount } from 'wagmi';
 import Image from "next/image";
 import { Connect } from "../../components/Connect";
+import ToggleButtons from "../../components/Dock";
+import { huddleIframeApp } from "@huddle01/huddle01-iframe";
 
 
 
@@ -28,7 +30,19 @@ import { Connect } from "../../components/Connect";
 
    const API = process.env.NEXT_PUBLIC_API_URI;
 
+   const [isVisible, setIsVisible] = useState(false);
+   const targetDivRef = useRef(null);
+ 
+   const handleButtonClick = () => {
+     setIsVisible(!isVisible);
+     if (!isVisible) {
+        setTimeout(() => {
+          targetDivRef.current.scrollIntoView({ behavior: "smooth" });
+        }, 0);
+      
+     }
 
+   };
    const handleDelete = async(name1) => {
     try {
       const response = await axios.delete(
@@ -172,7 +186,8 @@ theme="dark"
     /></div> 
 <img className="w-3/12 h-auto" src="/div.svg"alt="V"/>
   </div></div>
-  <div className="shadowCall2 w-10/12 mx-auto rounded bg-black2 flex min-h-60 flex-col justify-center items-center gap-y-5 my-10 py-5">
+  {isVisible && <div  ref={targetDivRef}
+        className="shadowCall2 w-10/12 mx-auto rounded bg-black2 flex min-h-60 flex-col justify-center items-center gap-y-5 my-10 py-5">
     <h1 className="font-semibold text-xl my-1">Networking Slots</h1>
     <div className="flex flex-row w-10/12 gap-y-2 justify-between items-center flex-wrap">
     {console.log(isOwner)}
@@ -181,13 +196,10 @@ theme="dark"
       })}
       {isOwner && <div className=" shadowCall w-5/12 h-32  bg-[#2a2a2a] rounded-md flex flex-row justify-center items-center">
        <div onClick={()=>{tableAdd()}} className="w-11/12 h-24 cursor-pointer shadowCall3 mx-3 flex flex-row items-center justify-center"><h1 className="text-3xl cursor-pointer font-extrabold">+</h1></div> 
-      </div>}</div></div>
- <div className="dock">
-      {/* Add your dock items here */}
-      <Image src="/Modal.png" width="400" height="80" alt="V"/>
-      
-      {/* Add more dock items here */}
-    </div>  
+      </div>}</div></div>}
+
+      <ToggleButtons network = {handleButtonClick}/>
+
      
  
 
