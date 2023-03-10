@@ -1,15 +1,16 @@
 .stall1 {
-    border-radius: 22px;
+    border-radius: 9px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 18rem;
-    width: 80%;
-    background: #0D0D0D;
+    width: 38%;
+    background: #2a2a2a;
      padding: 2rem 2rem 2rem 2rem;
      margin:auto;
      row-gap: 0.9rem;
+     filter: drop-shadow(0px 7.16992px 4.77994px rgba(0, 0, 0, 0.5));
      
 
     
@@ -40,7 +41,7 @@
 
 .profles {
     display: flex;
-    height: 5.3rem;
+    height: 4.4rem;
     width: auto;
     text-align: center;
     flex-direction: column;
@@ -77,7 +78,7 @@
 
 .arrange1 {
     display:grid;
-    grid-template-columns: 42% 42%;
+    grid-template-columns: 40% 40%;
     gap: 1rem 1.9rem;
     width: 100%;
     text-align: center;
@@ -146,7 +147,7 @@
 
 
 .profles2 {
-   gap:1rem;
+   
    display: flex;
    width: 20%;
    height: 70%;
@@ -168,6 +169,12 @@
     border-radius: 50%;
   }
 
+  
+.image-clip3 {
+    width: 55%;
+    overflow: hidden;
+    border-radius: 50%;
+  }
 .nameit{
    margin-top: 0.16rem;
    font-size: 0.68rem;
@@ -236,17 +243,17 @@
 
 
 .stall4{
-    border-radius: 22px;
+    border-radius: 9px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 15rem;
-    width: 87%;
-    background: #0D0D0D;
+    background: #2a2a2a;
     margin: auto;
     row-gap: 1rem;
     padding: 2rem 2rem 2rem 2rem;
+    filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.5));
    
 }
 
@@ -294,21 +301,12 @@
     
 }
 
-.button123{
-    background: linear-gradient(91.44deg, #D800A8 17.68%, #FF007A 88.87%);
-    box-shadow: 0px 11.6153px 29.0382px rgba(253, 0, 124, 0.25);
-    border-radius: 0.75rem;
-    width: 4.5rem;
-    height: 2.3rem;
-    color: #000;
-    font-weight: 600;
-    font-size: 0.84rem;
- }
+
 
 .profles4{
     display: flex;
-    height: 3.8rem;
-    width: auto;
+    height: 4.6rem;
+    width: fit-content;
     text-align: center;
     flex-direction: column;
     justify-content: space-around;
@@ -329,7 +327,4 @@
 }
 
 
-.profles4 img {
-    height: 50%;
-    width: auto;
-}
+

@@ -187,8 +187,8 @@ theme="dark"
   </div>
    {console.log(useraddress,"addr")}
   <div className="sec2">
- <div className="w-full flex flex-row h-10 justify-center items-center">
-   <h1 className="text-xl font-semibold mb-6">Main Event</h1></div>
+ <div className="w-full flex flex-row h-10 justify-start items-center">
+   <h1 className="text-xl font-semibold ml-1 mb-3">Main Event</h1></div>
  <div className="w-full flex gap-4 items-center justify-center flex-row"><div className="streamb">
 <Player
       title="stream"

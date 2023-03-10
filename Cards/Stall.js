@@ -45,7 +45,7 @@ export default function Stall({title,onOpen,host,OId,stallName}){
         const intervalId = setInterval(() => {
         synx2(stallName); 
     
-        }, 100000);
+        }, 10000);
     
         return () => clearInterval(intervalId);
       }, [isData]);
@@ -60,7 +60,7 @@ export default function Stall({title,onOpen,host,OId,stallName}){
                 <div className="nameit">{i.name}</div>
                 <span>{i.title}</span>
             </div>})}</div>{console.log(isData)}
-            <div className="head1 botm"><p className="mem">+{isData.length - 1} Members </p><button onClick={()=>onOpen(stallName)} className="button12">Join</button></div></div>
+            <div className="head1 botm"><p className="mem">+{isData.length - 1} Members </p><button onClick={()=>onOpen(stallName)} className="button1">Join</button></div></div>
          
     )
                     

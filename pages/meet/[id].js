@@ -13,7 +13,7 @@ import { Connect } from "../../components/Connect";
 import Image from 'next/image'
 import ToggleButtons from "../../components/Dock";
 import Chat from "../../components/chat/Chat";
-
+import ModalForm from "../../components/createRoom";
 
 
 
@@ -39,6 +39,7 @@ const [isVisible, setIsVisible] = useState(false);
  const [isVisible2, setIsVisible2] = useState(false);
  const [tTables, setT]= useState([]);  
  const targetDivRef = useRef(null);
+ const [Room, setRoom] = useState(false); 
 
  const handleButtonClick = () => {
    setIsVisible(!isVisible);
@@ -49,9 +50,10 @@ const [isVisible, setIsVisible] = useState(false);
     
    }
 
- };  const tableAdd = async (name)=>{
+ };  const tableAdd = async ()=>{
     
   const toastId  = toast.loading("Loading...");
+  let name;
   if (tTables !== []){name = `table${tTables + 1}`};
     const response = await axios.post(`http://${API}/api/tables/add`, {name,_id:ObjId});
   if (response.status === 200) {
@@ -68,22 +70,9 @@ const [isVisible, setIsVisible] = useState(false);
 
 }
 
-const roomAdd = async (name)=>{
+const roomAdd = async ()=>{
     
-  const toastId  = toast.loading("Loading...");
-  if (tTables !== []){name = `table${tTables + 1}`};
-    const response = await axios.post(`http://${API}/api/channels/add`, {name,_id:ObjId});
-  if (response.status === 200) {
-    toast.update(toastId, { render: "Created New Room", type: "success", isLoading: false, autoClose: 5000})
-    const { data: userData } = await axios.get(`http://${API}/api/tables/?_id=${ObjId}`);
-    setIsData(userData.userDoc);
-    setT(isdata?.length);
-   ;
-  } else {
-
-    toast.update(toastId, { render: "Some error occured", type: "error", isLoading: false, autoClose: 5000 })
-    
-  };
+setRoom(true);
 
 }
 
@@ -270,7 +259,7 @@ theme="dark"
     height: "97%",
     noBorder: true,
   }} useraddress="useraddress" isOpen={isOpen} name={meetName} onClose={(name)=>{handleDelete(name)}}key={1}/>
-
+<ModalForm isOpen={Room} ObjId={ObjId} onClose={()=>{setRoom(false)}}/>
 <Modal className="mod1" iframeData={ {
     roomUrl: `http://iframe.huddle01.com/${meetName+useraddress}`,
     width: "100%",
@@ -398,8 +387,8 @@ theme="dark"
                <div className="w-11/12 mx-auto rounded-2xl flex min-h-60 flex-wrap justify-between gap-y-5 py-5">
 
       {channel.map((e)=>{
-        return <Drooms channelName={e.channelName} OId={ObjId} topicName={e.topicName}  onOpen={()=>channelToast()} key={e._id}/>
-      })}  {isOwner && <div className="w-4/12 h-32 p-2 addTab">
+        return <Drooms channelName={e.channelName} OId={ObjId} host={e.host} topicName={e.topicName}  onOpen={()=>channelToast()} key={e._id}/>
+      })}  {isOwner && <div onClick={()=>{roomAdd()}} className="w-4/12 h-32 p-2 cursor-pointer addTab">
     <div className="addTabin flex flex-col items-center h-full justify-center gap-3">
     <h1 className="text-2xl font-extrabold">+</h1><h1 className="font-semibold">Create Room</h1></div></div>}
       </div>
