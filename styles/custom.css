@@ -199,6 +199,96 @@
   
   }
 
+  .account-card {
+    display: grid;
+    grid-template-columns: 54px 1fr 80px;
+    grid-gap: 20px;
+    height: 54px;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .account-card-primary {
+    background-color: var(--orange);
+    border-radius: 20px;
+    color: var(--white);
+    font-size: 12px;
+    padding: 6px;
+    width: 68px;
+    text-align: center;
+  }
+  
+  .account-card-info {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .account-card-info div:last-child {
+    margin-left: 6px;
+  }
+  
+  .account-card-id {
+    font-size: 15px;
+  }
+  
+  .profile-card {
+    border: 1px solid var(--gray);
+    border-radius: 8px;
+    min-width: 270px;
+    padding: 20px;
+  }
+  
+  .profile-card-img {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .profile-card-img .subscribe-btn {
+    font-size: 15px;
+    padding: 8px 12px;
+    max-width: 100px;
+  }
+  
+  .profile-card-img img,
+  .account-card-img img {
+    border: 1px solid var(--gray);
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .profile-card-name,
+  .account-card-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .profile-card-handle,
+  .account-card-handle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark-gray);
+  }
+  
+  .profile-card-bio {
+    margin-top: 10px;
+  }
+  
+  .profile-card-address {
+    display: grid;
+    grid-template-columns: 1fr 10px;
+    grid-gap: 10px;
+    align-items: center;
+  }
+  
+  .profile-card-address div:last-child {
+    background-color: var(--green);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+  }
+
   .unit{
     background: #232323;
     height:2.rem;

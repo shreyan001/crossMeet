@@ -15,6 +15,10 @@ import { publicProvider } from 'wagmi/providers/public';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { XmtpContextProvider } from "../context/XmtpContext";
 import { Buffer } from "buffer";
+import { AuthContextProvider } from "../context/auth";
+import { ApolloProvider } from "@apollo/client";
+import { apolloClient } from "../apollo";
+
 
 const { chains, provider } = configureChains(
   [bscTestnet],
@@ -74,8 +78,11 @@ const client = createReactClient ({
         fontStack: 'system',
       })}
 > 
+<ApolloProvider client={apolloClient}>
+      <AuthContextProvider>
   <Component {...pageProps} />
-
+</AuthContextProvider>
+</ApolloProvider>
 </RainbowKitProvider>
 </XmtpContextProvider></WagmiConfig>
             
