@@ -1,21 +1,21 @@
 import Link from 'next/link';
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useContext } from 'react';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Register from './functions/Register';
 import CreateMeet from './createMeet';
 import { useRouter } from 'next/router';
-import { useAccount } from 'wagmi';
-import { Connect } from './Connect';
+import { AuthContext } from "../context/auth";
+import Panel from './Panel';
 
 
 import axios from "axios";
 
 
 export  default function Login() {
-  
+  const { accessToken,address } = useContext(AuthContext); 
  const router = useRouter();
- const {isConnected,address } = useAccount();
+
 
  
   const [code,setCode] = useState();
@@ -75,14 +75,14 @@ async function handleLogin() {
 
 const redirect = () => {
    if(!code) {toast.error("please enter your code first")}
-    else if(isConnected && code.length===5){
+    else if(accessToken && code.length===5){
       handleLogin();
    
     }
-    else if (isConnected && code.length===null){
+    else if (accessToken && code.length===null){
       toast.error('please enter your code first');
     }
-    else if(isConnected && code.length !==7) {
+    else if(accessToken && code.length !==7) {
         toast.error('Meet code must be 5 digits'); 
     }
     else{
@@ -115,11 +115,11 @@ theme="dark"
 
          <div className=" mx-2 flex flex-row justify-center items-center h-24 w-1/8">
          <div className="h-fit w-fit  border-1 border-solid border-white "><img className=" h-8 w-auto" src='/logoimg.png' alt='logo'/></div>   
-            <h1 className=' font-semibold m-0 text-lg pl-3'>re:block</h1></div>
+            <h1 className=' font-semibold m-0 text-lg pl-3'>Cross-Meet</h1></div>
         <div className="mx-2 flex flex-row justify-center items-center h-24 w-fit">
             <a className='hover:opacity-60 cursor-pointer colorcode font-semibold text-lg px-3'
                 onClick={()=>{toast.dark("Coming Soon")}}
-                       >Marketplace</a><Connect/></div>
+                       >Marketplace</a><Panel/></div>
        </div>
     </nav>
 

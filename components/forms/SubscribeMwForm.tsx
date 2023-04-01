@@ -7,10 +7,10 @@ import {
 } from "react";
 import { AuthContext } from "../../context/auth";
 import { useLazyQuery } from "@apollo/client";
-import { ADDRESS } from "../../graphql";
+import { ADDRESS } from "../../graphQL";
 import { IProfileMwCard } from "../../types";
-import SubscribeMwCard from "../Cards/SubscribeMwCard";
-import SetSubscribeBtn from "../Buttons/SetSubscribeBtn";
+import SubscribeMwCard from "../../Cards/SubscribeMwCard";
+import SetSubscribeBtn from "../buttons/SetSubscribeBtn";
 import { BsCaretUpFill, BsFillCaretDownFill } from "react-icons/bs";
 
 const SubscribeMwForm = () => {

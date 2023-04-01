@@ -14,7 +14,7 @@ import {
 	PRIMARY_PROFILE,
 	PRIMARY_PROFILE_ESSENCES,
 	RELAY_ACTION_STATUS,
-} from "../graphql";
+} from "../graphQL";
 import { useCancellableQuery } from "../hooks/useCancellableQuery";
 import { timeout } from "../helpers/functions";
 import { useLazyQuery } from "@apollo/client";
@@ -22,6 +22,7 @@ import { useLazyQuery } from "@apollo/client";
 export const AuthContext = createContext<IAuthContext>({
 	address: undefined,
 	accessToken: undefined,
+	handle: undefined,
 	primaryProfile: undefined,
 	indexingProfiles: [],
 	indexingPosts: [],
@@ -31,6 +32,7 @@ export const AuthContext = createContext<IAuthContext>({
 	profiles: [],
 	setAddress: () => { },
 	setAccessToken: () => { },
+	setHandle: () => { },
 	setPrimaryProfile: () => { },
 	setIndexingProfiles: () => { },
 	setIndexingPosts: () => { },
@@ -50,6 +52,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 	/* State variable to store the address */
 	const [address, setAddress] = useState<string | undefined>(undefined);
 
+	const [handle, setHandle] = useState<string | undefined>(undefined);
 	/* State variable to store the access token */
 	const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
 
@@ -415,7 +418,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 				profiles,
 				indexingProfiles,
 				indexingPosts,
+				handle,
 				setAddress,
+				setHandle,
 				setAccessToken,
 				setPrimaryProfile,
 				setProfileCount,

@@ -1,5 +1,5 @@
-import { useEffect, useState,useRef } from "react";
-import Modal from  '../../components/Modal'
+import { useEffect, useState,useRef, useContext } from "react";
+import Modal from  '../../components/functions/bModal'
 import Table from "../../Cards/Table2";
 import { Player } from "@livepeer/react";
 import axios from 'axios';
@@ -11,6 +11,9 @@ import { Connect } from "../../components/Connect";
 import ToggleButtons from "../../components/Dock";
 import { huddleIframeApp } from "@huddle01/huddle01-iframe";
 import Chat from "../../components/chat/Chat";
+import Panel from "../../components/Panel";
+import { AuthContext } from "../../context/auth";
+
 
 
 
@@ -18,7 +21,7 @@ import Chat from "../../components/chat/Chat";
 
 
  export default function Calls() {
-  const {isConnected,address } = useAccount();
+  const { address, setHandle } = useContext(AuthContext);
   const router = useRouter();
   const [isOwner,setIsOwner] = useState(false);
   const [isOpen,setOpen] = useState(false);
@@ -80,6 +83,12 @@ import Chat from "../../components/chat/Chat";
     }
     setOpen(true);
     setcallName(name);
+  };
+
+  const leaveMeet = () => {
+    const { id } = router.query;
+    router.push(`/login/meet/${id}`)
+  
   };
 
   
@@ -181,9 +190,8 @@ theme="dark"
          </h1> 
     </div>
    <Image src='/wew.svg' height={40} width={40}/>
-   <div className="unit"><div className=" bg-black rounded-lg ml-1 p-1"><Image src='/1212.svg' height={20} width={20}/>
-   </div><div className="flex justify-center items-center"><Connect/></div></div>
-    <button className="button3 bg-red-600">Leave Meet</button>
+   <div className="unit"><div className="flex justify-center items-center"><Panel/></div></div>
+    <button onClick={leaveMeet} className="button3 bg-red-600">Leave Meet</button>
   </div>
    {console.log(useraddress,"addr")}
   <div className="sec2">
@@ -211,7 +219,7 @@ theme="dark"
        <div onClick={()=>{tableAdd()}} className="w-11/12 h-24 cursor-pointer shadowCall3 mx-3 flex flex-row items-center justify-center"><h1 className="text-3xl cursor-pointer font-extrabold">+</h1></div> 
       </div>}</div></div>}
 
-      <ToggleButtons network = {handleButtonClick} chat={handleButtonClick2}/>
+      <ToggleButtons network = {handleButtonClick} chat={handleButtonClick2} leaveMeet={()=>{leaveMeet()}}/>
 
      
  

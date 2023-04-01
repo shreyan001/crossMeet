@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_SUBSCRIBE_TYPED_DATA, RELAY } from "../../graphql";
+import { CREATE_SUBSCRIBE_TYPED_DATA, RELAY } from "../../graphQL";
 import { AuthContext } from "../../context/auth";
-import { ModalContext } from "../../context/modal";
+import { ToastContainer, toast, Slide } from 'react-toastify';
+
 
 function SubscribeBtn({
 	profileID,
@@ -12,7 +13,6 @@ function SubscribeBtn({
 	isSubscribedByMe: boolean;
 }) {
 	const { accessToken, connectWallet, checkNetwork } = useContext(AuthContext);
-	const { handleModal } = useContext(ModalContext);
 	const [createSubscribeTypedData] = useMutation(CREATE_SUBSCRIBE_TYPED_DATA);
 	const [relay] = useMutation(RELAY);
 	const [stateSubscribe, setStateSubscribe] = useState(false);
@@ -79,17 +79,17 @@ function SubscribeBtn({
 			setStateSubscribe(true);
 
 			/* Display success message */
-			handleModal("success", "Subscribed to profile!");
+			toast.success("Subscribed to profile!");
 		} catch (error) {
 			/* Display error message */
 			const message = error.message as string;
-			handleModal("error", message);
+			toast.error( message);
 		}
 	};
 
 	return (
 		<button
-			className="subscribe-btn"
+			className="button1"
 			onClick={handleOnClick}
 			disabled={stateSubscribe || isSubscribedByMe}
 		>

@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
-
+import { AuthContext } from "../../context/auth";
 
 
 export default function Register({code,address,objectName,isMOpen,onMClose,id})  {
     
- 
+  const { handle } =
+  useContext(AuthContext);
     const router = useRouter();
     const API = process.env.NEXT_PUBLIC_API_URI;
-  
-  const [username, setUsername] = useState('');
+
   const [isReg, setIsReg] = useState(false);
    let img_url = `http://robohash.org/set_set1/bgset_bg1/${address}.png`;
 
-    async function register(img, name, addr,_id) {
+    async function register(img,name, addr,_id) {
 
       if(name.length <= 4){toast.error("Name must have atleast 5 characters")}
 
@@ -45,9 +45,9 @@ export default function Register({code,address,objectName,isMOpen,onMClose,id}) 
 
    <h1 className="text-xs font-semibold">address:&nbsp;{address}</h1>
    
-   <input onChange={ev => setUsername(ev.target.value)} placeholder="Enter Your Name" type="text" className="w-1/2 h-8 text-xs font-semibold bg-black4 rounded-md"></input>
+   <h1 className="text-xs font-semibold">handle:&nbsp;{handle}</h1>
 
-   <div className="w-1/3 text-right"><button className="button1" onClick={()=>{register(img_url,username,address,id)}}>Submit</button></div>
+   <div className="w-1/3 text-right"><button className="button1" onClick={()=>{register(img_url,handle,address,id)}}>Submit</button></div>
  </div>)
 
 };

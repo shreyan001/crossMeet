@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import { IPostInput } from "../../types";
-import PostBtn from "../Buttons/PostBtn";
+import PostBtn from "../buttons/PostBtn";
 
 const PostForm = () => {
     const [postInput, setPostInput] = useState<IPostInput>({

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { IEssenceMwCard } from "../../types";
-import { parseURL } from "../../helpers/functions";
+import { IEssenceMwCard } from "../types";
+import { parseURL } from "../helpers/functions";
 
 const EssenceMwCard = ({
     essence,

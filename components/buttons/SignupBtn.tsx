@@ -15,13 +15,14 @@ import {
 } from "@ngneat/falso";
 import { IProfileMetadata, ISignupInput } from "../../types";
 import { AuthContext } from "../../context/auth";
-import { ModalContext } from "../../context/modal";
+import { ToastContainer, toast, Slide } from 'react-toastify';
+
 
 function SignupBtn({ handle, avatar, name, bio, operator }: ISignupInput) {
 	const router = useRouter();
 	const { indexingProfiles, setIndexingProfiles, connectWallet, checkNetwork } =
 		useContext(AuthContext);
-	const { handleModal } = useContext(ModalContext);
+
 
 	const handleOnClick = async () => {
 		try {
@@ -77,7 +78,7 @@ function SignupBtn({ handle, avatar, name, bio, operator }: ISignupInput) {
 			);
 
 			/* Close Signup Modal */
-			handleModal(null, "");
+		    
 
 			/* Call the getProfileIdByHandle function to get the profile id */
 			const profileID = await contract.getProfileIdByHandle(handle);
@@ -102,20 +103,20 @@ function SignupBtn({ handle, avatar, name, bio, operator }: ISignupInput) {
 			console.log(tx.hash);
 
 			/* Display success message */
-			handleModal("success", "Profile was created!");
+			toast.success("Profile was created!");
 		} catch (error) {
 			/* Set the indexingProfiles in the state variables */
 			setIndexingProfiles([...indexingProfiles]);
 
 			/* Display error message */
 			const message = error.message as string;
-			handleModal("error", message);
+			toast.error(message);
 		}
 	};
 
 	return (
 		<button
-			className="signup-btn"
+			className="button1"
 			onClick={() => handleOnClick()}
 		>
 			Mint Profile

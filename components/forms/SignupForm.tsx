@@ -1,15 +1,27 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useContext } from "react";
 import { ISignupInput } from "../../types";
-import SignupBtn from "../../components/Buttons/SignupBtn";
+import SignupBtn from "../buttons/SignupBtn";
+import { AuthContext } from "../../context/auth";
 
-const SignupForm = () => {
+
+interface ModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+  }
+
+const SignupForm : React.FC<ModalProps> = ({ isOpen, onClose }) => {
     const [signupInput, setSignupInput] = useState<ISignupInput>({
         handle: "",
         name: "",
         bio: "",
-        avatar: "",
         operator: "",
+        avatar:""
     });
+
+
+    const { indexingProfiles, setIndexingProfiles, connectWallet, checkNetwork } =
+		useContext(AuthContext);
+
 
     const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
@@ -20,8 +32,10 @@ const SignupForm = () => {
         });
     };
 
-    return (
-        <div className="form signup-form">
+    if(!isOpen){return null};
+
+    return (<div className="popup">
+        <div className="form popup-content ">
             <h2>Create profile</h2>
             <div>
                 <label>Handle (w/o @)</label>
@@ -67,8 +81,9 @@ const SignupForm = () => {
             </div>
             <div className="form-note"><strong>Note:</strong> For empty fields we will randomly generate values.</div>
             <SignupBtn {...signupInput} />
+            <button className="button1" onClick={()=>{onClose()}}>Close</button>
         </div>
-    );
+   </div> );
 };
 
 export default SignupForm;

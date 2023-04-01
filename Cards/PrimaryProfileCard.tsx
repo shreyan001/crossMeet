@@ -1,17 +1,26 @@
 import { useEffect, useState, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { IPrimaryProfileCard } from "../../types";
-import { parseURL } from "../../helpers/functions";
-import { AuthContext } from "../../context/auth";
+import { IPrimaryProfileCard } from "../types";
+import { parseURL } from "../helpers/functions";
+import { AuthContext } from "../context/auth";
 
 const PrimaryProfileCard = ({ handle, avatar, metadata }: IPrimaryProfileCard) => {
-    const { address } = useContext(AuthContext);
+    const { address, setHandle } = useContext(AuthContext);
     const [src, setSrc] = useState(parseURL(avatar));
     const [data, setData] = useState({
         name: "",
         bio: ""
     });
+
+    const handleImageError = () => {
+        setSrc(`http://robohash.org/set_set1/bgset_bg1/${address}.png`);
+      };
+      
+
+      useEffect(() => {
+      setHandle(handle);
+    }, [handle]); 
 
     useEffect(() => {
         if (!metadata) return;
@@ -34,34 +43,35 @@ const PrimaryProfileCard = ({ handle, avatar, metadata }: IPrimaryProfileCard) =
 
     return (
         <div className="profile-card">
-            <div className="profile-card-img center">
+            <div className="profile-card-img  center">
                 <Link href="/settings">
                     <div>
                         <Image
                             src={src}
                             alt="avatar"
-                            width={80}
-                            height={80}
-                            onError={() => setSrc("/assets/avatar-placeholder.svg")}
+                            width={40}
+                            height={40}
+                            onError={handleImageError}
                             placeholder="blur"
                             blurDataURL="/assets/avatar-placeholder.svg"
                         />
                     </div>
                 </Link>
+                <div> <div className="account-card-name">{data.name}</div>
+                <div className="account-card-handle">@{handle}</div> 
+                
                 {
                     address &&
                     <div className="profile-card-address">
                         <div>{`${address.slice(0, 6)}..`}</div>
                         <div></div>
                     </div>
-                }
+                }     
+               
             </div>
-            <div>
-                <div className="account-card-name">{data.name}</div>
-                <div className="account-card-handle">@{handle}</div>
             </div>
-            <br></br>
-            <div>{data.bio}</div>
+      
+            
         </div>
     );
 };

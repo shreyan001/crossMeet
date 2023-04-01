@@ -7,10 +7,10 @@ import {
 } from "react";
 import { AuthContext } from "../../context/auth";
 import { useLazyQuery } from "@apollo/client";
-import { ADDRESS } from "../../graphql";
+import { ADDRESS } from "../../graphQL";
 import { IEssenceMwCard } from "../../types";
-import EssenceMwCard from "../Cards/EssenceMwCard";
-import SetEssenceBtn from "../Buttons/SetEssenceBtn";
+import EssenceMwCard from "../../Cards/EssenceMwCard";
+import SetEssenceBtn from "../buttons/SetEssenceBtn";
 import { BsCaretUpFill, BsFillCaretDownFill } from "react-icons/bs";
 
 const EssenceMwForm = () => {

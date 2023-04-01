@@ -7,6 +7,9 @@ import { useCreateStream, createStream } from '@livepeer/react';
 import axios from "axios";
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import '@notifi-network/notifi-react-card/dist/index.css';
+import { ModalContext } from "../../../context/modal";
+import {useContext} from 'react';
+import { AuthContext } from "../../../context/auth";
 
 
 
@@ -14,6 +17,8 @@ import '@notifi-network/notifi-react-card/dist/index.css';
 const steps = ['Step 1', 'Step 2', 'Step 3'];
 export default function ProductPage() {
     const API = process.env.NEXT_PUBLIC_API_URI; 
+    const { accessToken, indexingProfiles, profiles } = useContext(AuthContext);
+    const { handleModal } = useContext(ModalContext);
       
 const putStream = async ()=>{
     
@@ -51,6 +56,7 @@ const {
   };
 
   const handleMeetButtonClick = () => {
+   createStream?.()
     setKey(stream?.streamKey);
     setId(stream?.playbackId);
   };
@@ -111,7 +117,7 @@ theme="dark"
         <input className="appearance-none bg-inherit border border-gray-600 rounded-md py-2 px-4 block w-full leading-tight focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
          onChange={ (e) => setStreamName(e.target.value)}/>
         <button className="button1"
-        onClick={()=> {createStream?.(),handleMeetButtonClick()}}>Create Stream</button>
+        onClick={()=> {handleMeetButtonClick()}}>Create Stream</button>
         {stream && <div className="renderKey">
             <p> <strong>stream Key:</strong>&nbsp; {Key}</p>
             <p> <strong>stream Name:</strong>&nbsp; {stream.name}</p>
@@ -128,7 +134,7 @@ theme="dark"
              className="block font-medium text-sm mb-2"
              htmlFor="input1"
            >
-Input 1
+Config Notifi
 </label>
 <input
              className="appearance-none bg-inherit border border-gray-600 rounded-md py-2 px-4 block w-full leading-tight focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
@@ -136,6 +142,15 @@ Input 1
              type="text"
              value={input1}
              onChange={handleInput1Change}
+             placeholder={'enter your Dapp Address'}
+           />
+           <input
+             className="appearance-none bg-inherit border my-2 border-gray-600 rounded-md py-2 px-4 block w-full leading-tight focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+             id="input1"
+             type="text"
+             value={input1}
+             onChange={handleInput1Change}
+             placeholder={'enter your card Id'}
            />
 </div>
 <div className="text-right">
@@ -148,6 +163,32 @@ Next
 </div>
 </div>
 </div>
+
+<div className=" flex flex-col justify-between bg-black2 px-10 py-10">
+<h2>Middlewares</h2>
+							<div className="middleware">
+								<div>
+									<h2>Subscribe</h2>
+								</div>
+								<button
+									className="middleware-btn"
+									onClick={() => handleModal("subscribe-mw", "")}
+								>
+									Set Subscribe
+								</button>
+							</div>
+							<div className="middleware">
+								<div>
+									<h2>Essence</h2>
+								
+								</div>
+								<button
+									className="middleware-btn"
+									onClick={() => handleModal("essence-mw", "")}
+								>
+									Set Essence
+								</button>
+							</div></div>
 <div className="flex-1">
 <div className="bg-[#2A2A2A] p-4 rounded-md">
 <div className="mb-4">

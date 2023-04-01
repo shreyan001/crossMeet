@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
+    domains: ['robohash.org'],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'robohash.org',
-        port: '',
-        pathname: '/set_set1/bgset_bg1/**',
+        protocol: "https",
+        hostname: "**",
       },
     ],
   },

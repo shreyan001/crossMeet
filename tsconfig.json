@@ -16,6 +16,6 @@
         "incremental": true,
         "useUnknownInCatchVariables": false
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/login/meet/[id].jsx"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/login/meet/[id].tsx", "components/NotifiCard.jsx", "components/Onboard.jsx", "components/Onboard.jsx", "next.config.js", "pages/call/[id].jsx", "pages/config/meet/[id].jsx", "pages/config/meet/[id].jsx"],
     "exclude": ["node_modules"]
 }

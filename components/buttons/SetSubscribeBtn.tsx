@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_SET_SUBSCRIBE_DATA_TYPED_DATA, RELAY } from "../../graphql";
+import { CREATE_SET_SUBSCRIBE_DATA_TYPED_DATA, RELAY } from "../../graphQL";
 import { AuthContext } from "../../context/auth";
 import { ModalContext } from "../../context/modal";
 import { getSubscriberSVGData, pinJSONToIPFS } from "../../helpers/functions";

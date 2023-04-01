@@ -2,6 +2,7 @@ import { Web3Provider } from "@ethersproject/providers";
 
 export interface IAuthContext {
 	address: string | undefined;
+	handle: string | undefined;
 	accessToken: string | undefined;
 	primaryProfile: IPrimaryProfileCard | undefined;
 	profileCount: number;
@@ -11,6 +12,7 @@ export interface IAuthContext {
 	indexingProfiles: IAccountCard[];
 	indexingPosts: IPostCard[];
 	setAddress: (address: string | undefined) => void;
+	setHandle: (address: string | undefined) => void;
 	setAccessToken: (accessToken: string | undefined) => void;
 	setPrimaryProfile: (primaryProfile: IPrimaryProfileCard | undefined) => void;
 	setProfileCount: (profileCount: number) => void;

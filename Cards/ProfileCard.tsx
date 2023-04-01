@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import SubscribeBtn from "../Buttons/SubscribeBtn";
-import { IProfileCard } from "../../types";
-import { parseURL } from "../../helpers/functions";
+import SubscribeBtn from "../components/buttons/SubscribeBtn";
+import { IProfileCard } from "../types";
+import { parseURL } from "../helpers/functions";
 
 const ProfileCard = ({
   handle,

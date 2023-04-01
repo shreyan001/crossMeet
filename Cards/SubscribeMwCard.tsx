@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { IProfileMwCard } from "../../types";
-import { parseURL } from "../../helpers/functions";
+import { IProfileMwCard } from "../types";
+import { parseURL } from "../helpers/functions";
 
 const SubscribeMwCard = ({
     profileID,

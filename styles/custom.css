@@ -76,6 +76,62 @@
     }
   }
   
+  .form .dropdown {
+    background: #fdf5f2;
+    border: 1px solid rgba(235, 87, 87, 0.3);
+    color: var(--orange);
+    cursor: pointer;
+    min-width: 250px;
+    max-width: 70%;
+    position: relative;
+    height: 44px;
+    text-align: center;
+  }
+  
+  .form .dropdown-options {
+    border: 1px solid rgba(235, 87, 87, 0.3);
+    background-color: var(--white);
+    color: var(--dark-gray);
+    width: calc(100% + 2px);
+    height: 240px;
+    overflow-y: scroll;
+    position: absolute;
+    top: 42px;
+    left: -1px;
+    text-align: left;
+  }
+  
+  .form .dropdown-select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0px 16px;
+  }
+  
+  .form .dropdown-select-post {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .form .dropdown-select svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .form .dropdown-select button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
   
   .identicon {
     border: 2px solid darkgrey;
@@ -234,28 +290,26 @@
   .profile-card {
     border: 1px solid var(--gray);
     border-radius: 8px;
-    min-width: 270px;
-    padding: 20px;
+    min-width: 100px;
+    padding: 3px;
   }
   
   .profile-card-img {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-right: 5px;
   }
   
   .profile-card-img .subscribe-btn {
-    font-size: 15px;
-    padding: 8px 12px;
-    max-width: 100px;
+    max-width: 40px;
   }
   
   .profile-card-img img,
   .account-card-img img {
     border: 1px solid var(--gray);
     border-radius: 50%;
-    margin-bottom: 10px;
+    margin-right: 10px;
   }
   
   .profile-card-name,
@@ -266,7 +320,8 @@
   
   .profile-card-handle,
   .account-card-handle {
-    font-size: 16px;
+    padding-top: 5px;
+    font-size: 10px;
     font-weight: 600;
     color: var(--dark-gray);
   }
@@ -276,17 +331,15 @@
   }
   
   .profile-card-address {
-    display: grid;
-    grid-template-columns: 1fr 10px;
-    grid-gap: 10px;
+   font-size: 10px;
     align-items: center;
   }
   
   .profile-card-address div:last-child {
     background-color: var(--green);
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
   }
 
   .unit{
@@ -355,6 +408,11 @@ font-size: 16px;
     border-radius: 0.8rem;
     padding: 20px;
     text-align: center;
+  }
+
+  .form input {
+    padding-left: 13px;
+    background-color: grey;
   }
   
   .popup h2 {
